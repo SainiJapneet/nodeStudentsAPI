@@ -2,16 +2,15 @@ const express = require('express');
 require('dotenv').config();
 const mongoose = require('mongoose');
 const dbString = process.env.DB_URL;
-const routes = require('./routes');
+const routes = require('./routes/routes');
 
 mongoose.connect(dbString);
 const db = mongoose.connection;
-
-db.once('Connected', ()=>{
+db.once('connected', ()=>{
     console.log("DB connected")
 });
 db.on('error',(error)=>{
-    console.log(error);
+    console.log("Something went wrong : " + error);
 });
 
 const app = express();
