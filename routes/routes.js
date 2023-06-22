@@ -2,7 +2,7 @@ const express = require('express');
 const studentModel = require('../models/studentModel');
 const route = express.Router();
 
-route.get("/students",async (req,res) =>{
+route.get("/getStudents",async (req,res) =>{
     try{
         const data = await studentModel.find();
         res.json(data)
@@ -11,7 +11,7 @@ route.get("/students",async (req,res) =>{
     }
 })
 
-route.get("/students/:id",async (req,res) =>{
+route.get("/getStudents/:id",async (req,res) =>{
     try{
         const id = req.params.id;
         const data = await studentModel.findById(id);
@@ -35,24 +35,25 @@ route.post("/students",async (req,res) =>{
     }
 })
 
-route.patch("/students/:id",async (req,res) =>{
+route.patch("/updateStudents/:id",async (req,res) =>{
     try{
         const id = req.params.id;
         const updatedData = req.body;
         const options = {new:true};
-        const result = await Model.findByIdAndUpdate(id, updatedData, options);
+        const result = await studentModel.findByIdAndUpdate(id, updatedData, options);
         res.send(result);
     } catch(error){
-        res.status(400).json({message: error.message})
+        res.status(500).json({message: error.message})
     }
 })
 
-route.delete("/students/:id",async (req,res) =>{
+route.delete("/deleteStudents/:id",async (req,res) =>{
     try{
-        const delData = await Model.findByIdAndRemove(req.params.id)
+        const id = req.params.id;
+        const delData = await studentModel.findByIdAndRemove(id);
         res.send(delData);
     }catch(error){
-        res.status(400).json({message: error.message})
+        res.status(500).json({message: error.message})
     }
 })
 
