@@ -43,6 +43,3 @@ DB_URL=your_mongodb_connection_string
 
 Contributions are welcome! If you find any issues or have suggestions for improvement, please create a new issue or submit a pull request.
 
-## License
-
-This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
